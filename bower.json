@@ -1,0 +1,24 @@
+{
+  "name": "ngFlic",
+  "description": "An AngularJS factory providing access to the Flic SDK",
+  "keywords": [
+    "angularjs",
+    "angular",
+    "flic",
+    "smart",
+    "button",
+    "sdk"
+  ],
+  "ignore": [
+  ],
+  "version": "0.0.1-dev",
+  "main": "dist/ngFlic.js",
+  "license": "Apache 2.0",
+  "authors": [
+    { "name": "jguix" }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "latest"
+  }
+}
