@@ -17,7 +17,6 @@ angular.module('ngFlic', [])
 
     return {
       init: function (appId, appSecret, appName, options) {
-        console.log("Called $cordovaFlic.init");
         return Flic.init(appId, appSecret, appName, options);
       },
 
