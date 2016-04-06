@@ -17,22 +17,20 @@ angular.module('ngFlic', [])
 
     return {
       init: function (appId, appSecret, appName, options) {
-        return navigator.Flic.init(appId, appSecret, appName, options);
+        console.log("Called $cordovaFlic.init");
+        return Flic.init(appId, appSecret, appName, options);
       },
 
       getKnownButtons: function(options) {
-        return navigator.Flic.getKnownButtons(options);
+        return Flic.getKnownButtons(options);
       },
 
       grabButton: function (options) {
-        return navigator.Flic.grabButton(options);
+        return Flic.grabButton(options);
       },
 
       waitForButtonEvent: function (options) {
-        return navigator.Flic.grabButton(options);
+        return Flic.grabButton(options);
       }
     };
   }])
-  .run(['$injector', function ($injector) {
-    $injector.get('$cordovaFlic'); //ensure the factory always gets initialised
-  }]);
