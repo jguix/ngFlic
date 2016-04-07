@@ -11,7 +11,7 @@
   ],
   "ignore": [
   ],
-  "version": "0.0.1-dev",
+  "version": "0.0.2",
   "main": "dist/ngFlic.js",
   "license": "Apache 2.0",
   "authors": [
