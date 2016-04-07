@@ -32,15 +32,10 @@ angular.module('starter', ['ionic', 'ngFlic'])
 
   $ionicPlatform.ready(function() {
 
-    $cordovaFlic.init(appId, appSecret, appName, {
-      success: function(result) {
-        $timeout(function () {
-          $scope.status = 'Flic init success';
-        });
-      },
-      error: function(message) {
-        $scope.status = 'Flic init error: ' + message;
-      }
+    $cordovaFlic.init(appId, appSecret, appName).then(function(result) {
+      $scope.status = 'Flic init success';
+    }, function(error) {
+      $scope.status = 'Flic init error: ' + error;
     });
 
   }, false);

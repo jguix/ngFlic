@@ -4,7 +4,7 @@
 /* globals Connection: true */
 angular.module('ngFlic', [])
 
-  .factory('$cordovaFlic', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+  .factory('$cordovaFlic', ['$rootScope', '$timeout', '$q', function ($rootScope, $timeout, $q) {
 
     /**
       * Fires flic events
@@ -16,20 +16,61 @@ angular.module('ngFlic', [])
     });
 
     return {
-      init: function (appId, appSecret, appName, options) {
-        return Flic.init(appId, appSecret, appName, options);
+      init: function (appId, appSecret, appName) {
+        // use promises to perform asynchronous Flic function
+        return $q(function(resolve, reject) {
+          Flic.init(appId, appSecret, appName, {
+            success: function(result) {
+                resolve(result);
+            },
+            error: function(message) {
+                reject(message);
+            }
+          });
+        });
       },
 
-      getKnownButtons: function(options) {
-        return Flic.getKnownButtons(options);
+      getKnownButtons: function() {
+        // use promises to perform asynchronous Flic function
+        return $q(function(resolve, reject) {
+          Flic.getKnownButtons({
+            success: function(result) {
+                resolve(result);
+            },
+            error: function(message) {
+                reject(message);
+            }
+          });
+        });
       },
 
-      grabButton: function (options) {
-        return Flic.grabButton(options);
+      grabButton: function () {
+        // use promises to perform asynchronous Flic function
+        return $q(function(resolve, reject) {
+          Flic.grabButton({
+            success: function(result) {
+                resolve(result);
+            },
+            error: function(message) {
+                reject(message);
+            }
+          });
+        });
       },
 
-      waitForButtonEvent: function (options) {
-        return Flic.grabButton(options);
+      waitForButtonEvent: function () {
+        // use promises to perform asynchronous Flic function
+        return $q(function(resolve, reject) {
+          Flic.waitForButtonEvent({
+            success: function(result) {
+                resolve(result);
+            },
+            error: function(message) {
+                reject(message);
+            }
+          });
+        });
       }
     };
+    
   }])
