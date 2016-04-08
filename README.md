@@ -34,31 +34,41 @@ Then add plugin and install ngFlic through bower
 
 ## Sample usage code
 
-angular.module('myApp', ['ionic', 'ngFlic'])
+    angular.module('myApp', ['ionic', 'ngFlic'])
 
-.controller('MyCtrl', function($scope, $ionicPlatform, $timeout, $cordovaFlic) {
-  var appId = "MY_FLIC_APP_ID";
-  var appSecret = "MY_FLIC_APP_SECRET";
-  var appName = "MY_FLIC_APP_NAME";
+    .controller('MyCtrl', function($scope, $ionicPlatform, $timeout, $cordovaFlic) {
+      var appId = "MY_FLIC_APP_ID";
+      var appSecret = "MY_FLIC_APP_SECRET";
+      var appName = "MY_FLIC_APP_NAME";
+    
+      $scope.status = 'Initiating flic...';
+      $scope.buttons = [];
 
-  $scope.status = 'Initiating flic...';
+      $ionicPlatform.ready(function() {
 
-  $ionicPlatform.ready(function() {
-
-    $cordovaFlic.init(appId, appSecret, appName, {
-      success: function(result) {
-        $timeout(function () {
-          $scope.status = 'Flic init success';
+        $cordovaFlic.init(appId, appSecret, appName).then(function(result) {
+          $scope.status = 'Flic init success.\nGetting known buttons...';
+    
+            $cordovaFlic.getKnownButtons().then(function(buttons) {
+              $scope.status = 'Got ' + (buttons.length > 0 ? buttons.length : 'no') + ' buttons.';
+              buttons.forEach(function(button) {
+                $scope.buttons.push(button);
+              });
+            }, function(error) {
+              $scope.status = 'GetKnownButtons error: ' + error;
+            });
+    
+        }, function(error) {
+          $scope.status = 'Flic init error: ' + error;
         });
-      },
-      error: function(message) {
-        $scope.status = 'Flic init error: ' + message;
-      }
+
+        $rootScope.$on('$cordovaFlic:flicButtonPressed', function (event, data) {
+          $scope.status = data.button.color + ' button received ' + data.event + ' event.';
+        });
+    
+      }, false);
+
     });
-
-  }, false);
-
-});
 
 ## Sample app
 
