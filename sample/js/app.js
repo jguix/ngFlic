@@ -61,15 +61,15 @@ angular.module('starter', ['ionic', 'ngFlic'])
     });
 
     $rootScope.$on('$cordovaFlic:flicButtonClick', function (event, data) {
-      $scope.status = event.color + ' button received ' + event.type + ' event.';
+      $scope.status = data.color + ' button received ' + data.type + ' event.';
     });
 
     $rootScope.$on('$cordovaFlic:flicButtonDblClick', function (event, data) {
-      $scope.status = event.color + ' button received ' + event.type + ' event.';
+      $scope.status = data.color + ' button received ' + data.type + ' event.';
     });
 
     $rootScope.$on('$cordovaFlic:flicButtonHold', function (event, data) {
-      $scope.status = event.color + ' button received ' + event.type + ' event.';
+      $scope.status = data.color + ' button received ' + data.type + ' event.';
     });
 
   }, false);
