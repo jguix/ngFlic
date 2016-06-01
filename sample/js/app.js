@@ -60,8 +60,16 @@ angular.module('starter', ['ionic', 'ngFlic'])
       $scope.status = 'Flic init error: ' + error;
     });
 
-    $rootScope.$on('$cordovaFlic:flicButtonPressed', function (event, data) {
-      $scope.status = data.button.color + ' button received ' + data.event + ' event.';
+    $rootScope.$on('$cordovaFlic:flicButtonClick', function (event, data) {
+      $scope.status = event.color + ' button received ' + event.type + ' event.';
+    });
+
+    $rootScope.$on('$cordovaFlic:flicButtonDblClick', function (event, data) {
+      $scope.status = event.color + ' button received ' + event.type + ' event.';
+    });
+
+    $rootScope.$on('$cordovaFlic:flicButtonHold', function (event, data) {
+      $scope.status = event.color + ' button received ' + event.type + ' event.';
     });
 
   }, false);

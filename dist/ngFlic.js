@@ -9,9 +9,21 @@ angular.module('ngFlic', [])
     /**
       * Fires flic events
       */
-    document.addEventListener('flicButtonPressed', function (event) {
+    document.addEventListener('flicButtonClick', function (event) {
       $timeout(function () {
-        $rootScope.$broadcast('$cordovaFlic:flicButtonPressed', event);
+        $rootScope.$broadcast('$cordovaFlic:flicButtonClick', event);
+      });
+    });
+
+    document.addEventListener('flicButtonDblClick', function (event) {
+      $timeout(function () {
+        $rootScope.$broadcast('$cordovaFlic:flicButtonDblClick', event);
+      });
+    });
+
+    document.addEventListener('flicButtonHold', function (event) {
+      $timeout(function () {
+        $rootScope.$broadcast('$cordovaFlic:flicButtonHold', event);
       });
     });
 
@@ -56,21 +68,8 @@ angular.module('ngFlic', [])
             }
           });
         });
-      },
-
-      waitForButtonEvent: function () {
-        // use promises to perform asynchronous Flic function
-        return $q(function(resolve, reject) {
-          Flic.waitForButtonEvent({
-            success: function(result) {
-                resolve(result);
-            },
-            error: function(message) {
-                reject(message);
-            }
-          });
-        });
       }
+
     };
     
   }])
